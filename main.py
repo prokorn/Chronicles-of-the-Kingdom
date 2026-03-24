@@ -7,9 +7,9 @@ class Kingdom:
         self.population = 50
         self.food = 100
         self.turn = 1
-        self.history = [] # Порожній список для майбутніх записів
+        self.history = [] # list to save data
 
-    def record_history(self): # записує історію ходу
+    def record_history(self): # save the history of turn
         data_snap = {
             "Turn": self.turn,
             "Gold": self.gold,
@@ -25,7 +25,7 @@ class Kingdom:
         self.food -= self.population * 0.2
 
 my_kingdom = Kingdom("Red")
-while my_kingdom.food > 0 and my_kingdom.population > 0:
+while my_kingdom.food > 0 and my_kingdom.population > 0: # the game logic
     print(f"\n--- Turn {my_kingdom.turn} ---")
 
     print(f"Gold: {my_kingdom.gold} | Food: {my_kingdom.food} | population: {my_kingdom.population}")
@@ -56,7 +56,7 @@ while my_kingdom.food > 0 and my_kingdom.population > 0:
     my_kingdom.next_turn()
 
 
-df = pd.DataFrame(my_kingdom.history)
+df = pd.DataFrame(my_kingdom.history) # convert to pandas df
 print(df.head())
 
 df.to_csv("kingdom_stats.csv", index=False)
@@ -64,22 +64,22 @@ print("📊 Statistics saved at 'kingdom_stats.csv'")
 
 import matplotlib.pyplot as plt
 
-# Створюємо графік
-plt.figure(figsize=(10, 6)) # Розмір вікна
+# graph creation
+plt.figure(figsize=(10, 6)) # window size
 
-# Малюємо лінії для кожного ресурсу
+# lines
 plt.plot(df['Turn'], df['Gold'], label='Золото', color='gold', marker='o')
 plt.plot(df['Turn'], df['Food'], label='Їжа', color='green', marker='s')
 plt.plot(df['Turn'], df['Population'], label='Населення', color='blue', marker='^')
 
-# Налаштування вигляду
+# view
 plt.title(f"Histrory of kingdom {my_kingdom.name}")
 plt.xlabel("Turn")
 plt.ylabel("Amount")
-plt.legend() # Показує назви ліній
-plt.grid(True) # Додає сітку
+plt.legend() # name of lines
+plt.grid(True) # add grid
 
-# Виводимо графік на екран
+# Вshow the graph
 plt.show()
 
 
