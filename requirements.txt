@@ -1,0 +1,2 @@
+pandas # for data collection and demonstration
+matplotlib  # for visualization
